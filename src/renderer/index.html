@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browser Desktop</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app shell theme-system" id="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">B</div>
+        <div>
+          <div class="brand-title">Browser Desktop</div>
+          <div class="brand-subtitle">Chrome-like Web Browser</div>
+        </div>
+      </div>
+      <button class="primary-btn" id="newTabBtn">+ 新建标签页</button>
+      <button class="secondary-btn" id="openFileBtn">打开 HTML / PDF</button>
+      <button class="secondary-btn" id="homeBtn">回到主页</button>
+      <button class="secondary-btn" id="settingsToggleBtn">设置面板</button>
+      <button class="secondary-btn" id="aiToggleBtn">AI 侧边栏</button>
+      <section class="panel">
+        <h3>搜索</h3>
+        <div class="search-row">
+          <input id="searchInput" type="text" placeholder="搜索或输入网址" />
+          <button id="searchBtn">搜索</button>
+        </div>
+      </section>
+      <section class="panel">
+        <h3>书签</h3>
+        <div class="search-row">
+          <input id="bookmarkName" type="text" placeholder="书签名称" />
+          <button id="bookmarkBtn">保存</button>
+        </div>
+        <div id="bookmarksList" class="stack-list"></div>
+      </section>
+      <section class="panel small-info">
+        <h3>历史</h3>
+        <div id="historyList" class="stack-list"></div>
+      </section>
+      <section class="panel small-info">
+        <h3>下载</h3>
+        <div id="downloadsList" class="stack-list"></div>
+      </section>
+      <section class="panel small-info">
+        <h3>风格</h3>
+        <div class="theme-grid" id="themeGrid">
+          <button data-theme="aurora">淡绿色</button>
+          <button data-theme="midnight">淡蓝色</button>
+          <button data-theme="sunrise">淡粉色</button>
+          <button data-theme="pearl">白色</button>
+          <button data-theme="system">系统</button>
+        </div>
+      </section>
+      <section class="panel small-info">
+        <h3>扩展</h3>
+        <p>支持加载 Chrome / Edge 插件目录与扩展清单。</p>
+        <div class="search-row">
+          <button class="secondary-btn" id="loadExtensionBtn">加载扩展</button>
+          <button class="secondary-btn" id="refreshExtensionsBtn">刷新列表</button>
+        </div>
+        <div id="extensionList" class="extension-list"></div>
+      </section>
+      <section class="panel small-info hidden" id="settingsPanel">
+        <h3>设置</h3>
+        <label>主页</label>
+        <input id="homepageInput" type="text" placeholder="https://www.google.com" />
+        <label>搜索引擎</label>
+        <input id="searchEngineInput" type="text" placeholder="https://www.google.com/search?q=" />
+        <label>下载目录</label>
+        <div class="search-row">
+          <input id="downloadDirInput" type="text" readonly />
+          <button id="pickDownloadDirBtn">选择</button>
+        </div>
+        <label class="checkbox-row"><input id="openLinksInNewTabInput" type="checkbox" /> 外链默认新建标签页</label>
+        <div class="search-row">
+          <button id="saveSettingsBtn">保存设置</button>
+          <button id="resetSettingsBtn">恢复默认</button>
+        </div>
+      </section>
+    </aside>
+    <main class="main-view">
+      <header class="topbar">
+        <div class="navigation-row">
+          <button id="backBtn" title="后退">←</button>
+          <button id="forwardBtn" title="前进">→</button>
+          <button id="reloadBtn" title="刷新">⟳</button>
+          <button id="downloadBtn" title="下载管理">⇩</button>
+          <div class="address-wrap">
+            <input id="addressBar" type="text" placeholder="输入网址或本地文件路径" />
+            <button id="goBtn">访问</button>
+          </div>
+        </div>
+        <div class="tab-strip" id="tabStrip"></div>
+      </header>
+      <section class="content-area">
+        <div class="welcome" id="welcomeScreen">
+          <h1>功能齐全的桌面浏览器</h1>
+          <p>浏览网页、打开本地 HTML/HTM/PDF、切换主题、管理标签页，并为 Chrome/Edge 插件保留扩展入口。</p>
+          <div class="welcome-actions">
+            <button class="primary-btn" id="quickStartBtn">开始使用</button>
+          </div>
+        </div>
+        <div class="browser-stage hidden" id="browserStage">
+          <webview id="activeWebview" class="browser-webview" allowpopups webpreferences="contextIsolation=yes,sandbox=no"></webview>
+        </div>
+      </section>
+    </main>
+    <aside class="ai-sidebar hidden" id="aiSidebar">
+      <div class="ai-header">
+        <div>
+          <div class="ai-title">AI 助手</div>
+          <div class="ai-subtitle">DeepSeek · 侧边栏模式</div>
+        </div>
+        <button id="closeAiBtn">×</button>
+      </div>
+      <div class="ai-config">
+        <label>模型</label>
+        <select id="aiModelSelect">
+          <option value="deepseek-chat">deepseek-chat</option>
+          <option value="deepseek-reasoner">deepseek-reasoner</option>
+        </select>
+        <label>API Key</label>
+        <input id="aiKeyInput" type="password" placeholder="请输入 DeepSeek API Key" />
+        <div class="search-row">
+          <button id="saveAiKeyBtn">保存</button>
+          <button id="clearAiKeyBtn">清除</button>
+        </div>
+      </div>
+      <div class="ai-toolbar">
+        <button id="aiSendPageBtn">总结当前页面</button>
+        <button id="aiClearChatBtn">清空对话</button>
+      </div>
+      <div id="aiChat" class="ai-chat"></div>
+      <div class="ai-input-row">
+        <textarea id="aiPromptInput" rows="4" placeholder="输入问题，回车发送；Shift+Enter 换行"></textarea>
+        <button id="aiSendBtn">发送</button>
+      </div>
+    </aside>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>
