@@ -18,6 +18,7 @@ contextBridge.exposeInMainWorld('browserAPI', {
   getAiConfig: () => ipcRenderer.invoke('browser:get-ai-config'),
   readAiConfig: () => ipcRenderer.invoke('browser:read-ai-config'),
   writeAiConfig: (config) => ipcRenderer.invoke('browser:write-ai-config', config),
+  getAiKeyDebug: () => ipcRenderer.invoke('browser:get-ai-key-debug'),
   onThemeChanged: (callback) => ipcRenderer.on('theme-changed', (_, theme) => callback(theme)),
   onSettingsUpdated: (callback) => ipcRenderer.on('settings-updated', (_, settings) => callback(settings)),
   onAiConfigUpdated: (callback) => ipcRenderer.on('ai-config-updated', (_, config) => callback(config)),

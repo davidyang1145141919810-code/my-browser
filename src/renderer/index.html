@@ -20,7 +20,7 @@
       <button class="secondary-btn" id="openFileBtn">打开 HTML / PDF</button>
       <button class="secondary-btn" id="homeBtn">回到主页</button>
       <button class="secondary-btn" id="settingsToggleBtn">设置面板</button>
-      <button class="secondary-btn" id="aiToggleBtn">AI 侧边栏</button>
+      <button class="secondary-btn" id="aiToggleBtn">AI 助手</button>
       <section class="panel">
         <h3>搜索</h3>
         <div class="search-row">
@@ -81,21 +81,25 @@
         </div>
       </section>
     </aside>
+
     <main class="main-view">
-      <header class="topbar">
-        <div class="navigation-row">
-          <button id="backBtn" title="后退">←</button>
-          <button id="forwardBtn" title="前进">→</button>
-          <button id="reloadBtn" title="刷新">⟳</button>
-          <button id="downloadBtn" title="下载管理">⇩</button>
-          <div class="address-wrap">
+      <header class="topbar edge-topbar">
+        <div class="edge-toolbar-row">
+          <div class="nav-cluster">
+            <button id="backBtn" title="后退">←</button>
+            <button id="forwardBtn" title="前进">→</button>
+            <button id="reloadBtn" title="刷新">⟳</button>
+          </div>
+          <div class="address-wrap edge-address-wrap">
             <input id="addressBar" type="text" placeholder="输入网址或本地文件路径" />
             <button id="goBtn">访问</button>
           </div>
+          <button id="downloadBtn" title="下载管理">⇩</button>
         </div>
-        <div class="tab-strip" id="tabStrip"></div>
+        <div class="tab-strip edge-tab-strip" id="tabStrip"></div>
       </header>
-      <section class="content-area">
+
+      <section class="content-area edge-content-area">
         <div class="welcome" id="welcomeScreen">
           <h1>功能齐全的桌面浏览器</h1>
           <p>浏览网页、打开本地 HTML/HTM/PDF、切换主题、管理标签页，并为 Chrome/Edge 插件保留扩展入口。</p>
@@ -108,19 +112,26 @@
         </div>
       </section>
     </main>
-    <aside class="ai-sidebar hidden" id="aiSidebar">
+
+    <aside class="ai-drawer closed" id="aiSidebar">
+      <div class="ai-drawer-handle" id="aiDrawerHandle" title="打开 AI 助手">
+        <span></span>
+      </div>
       <div class="ai-header">
         <div>
-          <div class="ai-title">AI 助手</div>
-          <div class="ai-subtitle">DeepSeek · 侧边栏模式</div>
+          <div class="ai-title">Copilot</div>
+          <div class="ai-subtitle">DeepSeek · 侧边抽屉</div>
         </div>
-        <button id="closeAiBtn">×</button>
+        <div class="ai-header-actions">
+          <button id="aiCollapseBtn" title="收起">›</button>
+          <button id="closeAiBtn" title="关闭">×</button>
+        </div>
       </div>
       <div class="ai-config">
         <label>模型</label>
         <select id="aiModelSelect">
-          <option value="deepseek-chat">deepseek-chat</option>
-          <option value="deepseek-reasoner">deepseek-reasoner</option>
+          <option value="deepseek-v4-flash">deepseek-v4-flash</option>
+          <option value="deepseek-v4-pro">deepseek-v4-pro</option>
         </select>
         <label>API Key</label>
         <input id="aiKeyInput" type="password" placeholder="请输入 DeepSeek API Key" />

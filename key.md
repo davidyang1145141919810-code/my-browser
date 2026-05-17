@@ -1,21 +1,17 @@
-# Browser Desktop AI 配置
+# DeepSeek API 配置模板
+# 请将你自己的 Key 填到下面，不要提交到公开仓库。
 
-请在下面填写你的 DeepSeek 配置。不要把这个文件提交到公开仓库。
-
-## 配置格式
-
-```md
 API_KEY=sk-e9f7e2187edc490681a8babee348ed23
-MODEL=deepseek-chat
-```
+MODEL=deepseek-v4-flash
 
-## 支持的模型
+# 可选值：
+# MODEL=deepseek-v4-flash
+# MODEL=deepseek-v4-pro
 
-- `deepseek-chat`
-- `deepseek-reasoner`
+# 如果你希望默认使用更强的模型，就改成：
+# MODEL=deepseek-v4-pro
 
-## 说明
-
-- `API_KEY` 必填
-- `MODEL` 可选，默认 `deepseek-chat`
-- 保存后重新启动程序，程序会自动读取这个文件
+# 说明：
+# 1. API_KEY 由你自己填写
+# 2. 程序会优先读取这里的 MODEL
+# 3. 如果你不填 MODEL，默认会按 deepseek-v4-flash 处理
