@@ -195,7 +195,7 @@ app.whenReady().then(() => {
   ipcMain.handle('browser:pick-download-dir', async () => { const result = await dialog.showOpenDialog(mainWindow, { properties: ['openDirectory'] }); if (result.canceled || !result.filePaths[0]) return null; settings.downloadDir = result.filePaths[0]; broadcastSettings(); return settings.downloadDir; });
   ipcMain.handle('browser:get-download-dir', async () => settings.downloadDir);
   ipcMain.handle('browser:get-ai-config', async () => ({ model: aiConfig.model, hasApiKey: !!aiConfig.apiKey }));
-  ipcMain.handle('browser:read-ai-config', async () => ({ model: aiConfig.model, hasApiKey: !!aiConfig.apiKey }));
+  ipcMain.handle('browser:read-ai-config', async () => ({ apiKey: aiConfig.apiKey, model: aiConfig.model }));
   ipcMain.handle('browser:write-ai-config', async (_, nextConfig) => {
     aiConfig = {
       apiKey: typeof nextConfig?.apiKey === 'string' ? nextConfig.apiKey : aiConfig.apiKey,
